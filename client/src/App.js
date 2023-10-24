@@ -84,7 +84,7 @@ function App() {
           <Route path="/" element={<Home logout={logout} /> } />
 
            <Route path="/askquestion" element={<AskQuestion/>} />
-           <Route path="/answer/questionId" element={<AnswerQuestion/>} />
+           <Route path="/answer/:questionId" element={<AnswerQuestion/>} />
 
         </Routes>
         <Footer/>

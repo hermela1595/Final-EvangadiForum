@@ -1,9 +1,9 @@
-// require("dotenv").config();
+require("dotenv").config();
 const pool = require("./server/config/database");
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = 4000;
+const port = process.env.PORT
 const userRouter = require('./server/api/users/user.router')
 const questionRouter = require("./server/api/question/question.router");
 const answerRouter = require("./server/api/Answer/AnswerRouter")

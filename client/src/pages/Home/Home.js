@@ -1,69 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../context/Context';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-// import hLogo from '../../assets/evangadi-logo-home.png';
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../context/Context";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import AskQuestion from "../AskQueation/AskQueation";
+import hLogo from "../../assets/evangadi-logo-home.png";
 // import Questions from '../../Components/Questions';
-import AskQuestion from '../AskQueation/AskQueation';
+
 // import MdArrowForwardIos from 'react-icons/md'
 
-// const Home = ({ logout, question}) => {
-//   const [userData] = useContext(UserContext); // Destructure only the userData from context
-//   const [allQuestions, setAllQuestions] = useState([]); // Use useState for allQuestions
-//   const navigate = useNavigate();
-
-//   const fetchQuestions = async () => {
-//     try {
-//       const questionRes = await axios.get('http://localhost:4000/api/question');
-//       setAllQuestions(questionRes.data.data);
-//     } catch (err) {
-//       console.log('Problem:', err);
-//     }
-//   };
-
-//   useEffect(() => {
-//     if (!userData.user) {
-//       navigate('/login');
-//     } else {
-//       fetchQuestions(); // Call the function to fetch questions when userData is available
-//     }
-//   }, [userData.user, navigate]);
-
-//   return (
-//     <div className="bg-gray-100 h-screen text-center">
-      
-//       <div className=' border-2'>
-//         <div className=''>
-//         <Link to={"/"}>
-//       <img className=' max-w-full ps-8 md:ps-20 h-4 md:h-6 relative top-8 ' src={hLogo} alt='' />
-//       </Link>
-//           <p className=' text-center ps-80 me-6 hover:text-orange-400 relative hidden md:inline-flex'>Home</p>
-//           <p className=' hover:text-orange-400 relative hidden md:inline-flex'>How it works</p>
-//           </div>
-//         <div className="text-center relative top ps-64 md:ms-[500px]   md:bottom-6 ">
-//           <button
-//             className="bg-blue-500 hover-bg-blue-700 text-white font-medium py-2 px-10 rounded text-sm "
-//             onClick={logout}>Log Out</button>
-//         </div>
-//       </div>
-
-//       <Link to={"/AskQueation"}>
-//       <button className="bg-blue-500 hover-bg-blue-700 text-white font-medium py-2 px-4 md:px-10 relative top-6 md:me-[900px] rounded text-sm me-80 "
-//             onClick={question}>Ask Question {userData.question?.question}</button>
-//             </Link>
-//             <Questions/>
-//           <button>
-//             {allQuestions?.map((question, userName) => (
-//               <li key={userName}>{question}</li>
-//             ))}
-//           </button>
-//       <h1 className="text-2xl font-bold ps-60 text-center relative   md:ms-[500px]">
-//           Welcome {userData.user?.display_name}
-//         </h1>
-        
-//     </div>
-//   );
-// };
 const Home = ({ logout }) => {
   const [userData, setUserData] = useContext(UserContext);
   const [page, setPage] = useState("Home");
@@ -77,11 +21,11 @@ const Home = ({ logout }) => {
     const fetchQuestions = async () => {
       // console.log(">>>>>>>>Home useEffect >> fetchQuestions: 1");
 
-      // let questions = await axios.get("http://localhost:4000/api/questions");
-      let questions = await axios.get('http://localhost:4000/api/questions');
+      let questions = await axios.get("http://localhost:4000/api/questions/all");
       // console.log(">>>>>>>>Home useEffect >> fetchQuestions: 2");
 
-      questions = questions.data.data;
+      questions = questions.data.questions;
+      
       // console.log(">>>>>>>>Fetched questions:", questions);
       setAllQuestions(() => {
         return questions;
@@ -89,57 +33,76 @@ const Home = ({ logout }) => {
     };
     fetchQuestions();
   }, [userData.user, navigate]);
+  console.log(allQuestions);
 
   return (
     <>
-      <div className="home">
-        {/* show username in homepage */}
-        <div className="home__top">
-          {/* <Link to="/AskQuestion"> */}
-          <button
-            onClick={() => {
-              navigate("/AskQuestion");
-            }}
-            className="home_topBtn"
-          >
-            Ask Question
-          </button>
+      <div className=" md:inline-flex h-12 w-full md:h-24 cursor-pointer ms-6 md:ms-16 duration-300 relative top-4">
+        <Link to={"/"}>
+          <img
+            className="max-w-full h-5 md:h-8 mt-6 md:mt-6 ms-16 "
+            src={hLogo}
+            alt=""
+          />
+        </Link>
 
+        {/* <LuMenu className='relative ms-96 bottom-5 '/> */}
 
-          <h4>Welcome: {userData.user?.display_name}</h4>
+        <div className=" hidden md:inline-flex  relative items-center">
+          <p className="me-6 md:ms-[500px] hover:text-orange-400">Home</p>
+          <p className="me-6 hover:text-orange-400">How it works</p>
+          <Link to={"/login"}>
+            <button
+              onClick={logout}
+              className="relative h-8 w-32  bg-blue-500 text-white font-semibold pt-1 rounded-md hover:bg-orange-400 focus:outline-none text-center bottom-1"
+            >
+              Log out
+            </button>
+          </Link>
         </div>
-        {/* <button onClick={logout}>Log out</button> */}
-        <h3 className="home__question">Questions</h3>
-        {/* <div> printed: {allQuestions[0]?.question_id}</div> */}
-        <div className="home__questionLists">
-          <div>
+      </div>
+      <div className="bg-gray-100 p-4">
+        {/* Show username in homepage */}
+        <div className="bg-white p-4 rounded shadow h-52">
+          <div className="flex justify-between items-center">
+            <button
+              onClick={() => navigate("/AskQuestion")}
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Ask Question
+            </button>
+            <h4 className="text-xl">Welcome: {userData.user?.display_name}</h4>
+          </div>
+
+          <h3 className="text-2xl font-bold mt-4">Questions</h3>
+          <div className="mt-4">
             {allQuestions?.map((question) => (
-              <div key={question.question_id}>
+              <div key={question.question_id} className="mb-4">
+               
                 <Link
-                  // to={/answer}
-                  to={`/answer/:${question.question_id}`}
-                  // state prop used to pass the data along the link
+                  to={`/answer/${question.question_id}`}
                   state={{
                     question: question,
                     currentUserId: userData.user?.id,
                   }}
-                  className="Link"
+                  className="text-blue-500 hover:underline"
                 >
-                  <AskQuestion show={question} />
-                  {/* <MdArrowForwardIos className="MdArrowForwardIos" /> */}
+                   <div>
+                  {question.question}
+                </div>
+                  
+                  {/* You can add an icon here using a suitable icon library */}
                 </Link>
               </div>
             ))}
           </div>
+          {allQuestions?.length < 3 && <div className="mt-4" />}
+          {/* Logout when the button clicked in which the function comes from app.js */}
         </div>
-        {allQuestions.length < 3 && (
-          <div className="home__questionListsBottom" />
-        )}
-        {/* logout when the button clicked in which the function comes from app.js */}
-        {/* <button onClick={logout}>Log out</button> */}
       </div>
-    </>
-  );
+          
+    </>
+  );
 };
 
 export default Home;
