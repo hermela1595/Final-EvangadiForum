@@ -40,7 +40,9 @@ const Login = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen md:inline-flex lg:inline-flex items-center justify-center w-full p-12">
-      <div className="bg-white p-6 rounded-md md:shadow-2xl w-96 ">
+     
+      <div className="bg-white p-6 rounded-md md:shadow-2xl w-96 md:w-[500px] md:h-[450px]">
+        
         <h1 className=" text-2xl font-semibold mb-4">Login to your account</h1>
         <p className="text-sm text-gray-800 mb-4">
           Don't have an account?{' '}

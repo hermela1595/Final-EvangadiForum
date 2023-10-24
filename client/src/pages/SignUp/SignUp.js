@@ -45,7 +45,7 @@ const SignUp = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen md:inline-flex lg:inline-flex items-center justify-center w-full p-10">
-    <div className="bg-white rounded-md md:shadow-2xl w-99 p-12 ">
+    <div className="bg-white rounded-md md:shadow-2xl  p-12 ">
       <h1 className="text-2xl font-bold mb-4">Join the network</h1>
 
       <Link to="/login" className="text-blue-500">Already have an account?</Link>

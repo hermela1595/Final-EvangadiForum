@@ -5,7 +5,10 @@ import axios from 'axios';
 import SignUp from './pages/SignUp/SignUp';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
-import Nav from './pages/Nav/Nav';
+import Nav from './Components/Nav/Nav';
+import Footer from './Components/Footer';
+import AskQuestion from './pages/AskQueation/AskQueation';
+import AnswerQuestion from './pages/Answer/AnswerQuestion';
 
 function App() {
   const [userData, setUserData ] = useContext(UserContext);
@@ -59,14 +62,32 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav/>
+       
         <Routes>
           {/* Define your routes here */}
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={
+          <>
+            <Nav/> <SignUp />  
+          </>
+          } 
+          />
+
+          <Route path="/login" element={
+           <>
+            <Nav/> <Login />  
+          </>
+          } 
+          />
+         
+
           {/* passing logout function as props to Home page */}
-          <Route path="/" element={<Home logout={logout} />} />
+          <Route path="/" element={<Home logout={logout} /> } />
+
+           <Route path="/askquestion" element={<AskQuestion/>} />
+           <Route path="/answer/questionId" element={<AnswerQuestion/>} />
+
         </Routes>
+        <Footer/>
       </div>
     </Router>
   );

@@ -1,12 +1,11 @@
 const mysql2 = require("mysql2");
 
-
 const pool = mysql2.createPool({
-  host:  "localhost",
+  host: "localhost",
   user: "evangadi_froum",
   password: "MOjry-ToZy5SAdOe",
   database: "evangadi_froum",
-  connectionLimit: 10
+  connectionLimit: 10,
 });
 
 pool.getConnection(function (err, connection) {
@@ -21,10 +20,10 @@ let registration = `CREATE TABLE IF NOT EXISTS registration(
   PRIMARY KEY(user_id)
   )`;
 
-  pool.query(registration, (err, results) => {
-    if (err) throw err;
-    console.log('registrtion table created');
-  })
+pool.query(registration, (err, results) => {
+  if (err) throw err;
+  console.log("registrtion table created");
+});
 
 let profile = `CREATE TABLE IF NOT EXISTS profile(
   user_profile_id INT AUTO_INCREMENT,
@@ -33,43 +32,42 @@ let profile = `CREATE TABLE IF NOT EXISTS profile(
   last_name VARCHAR (255) NOT NULL,
   PRIMARY KEY( user_profile_id ),
   FOREIGN KEY(user_id)REFERENCES registration(user_id)
-)`; 
+)`;
 
 pool.query(profile, (err, results) => {
   if (err) throw err;
   console.log("profile, table created");
-})
+});
 
-let question = `CREATE TABLE IF NOT EXISTS question (
-  question_id INT AUTO_INCREMENT PRIMARY KEY,
-  question VARCHAR(255) NOT NULL,
-  question_description VARCHAR(255),
-  question_code_block VARCHAR(255),
-  tags VARCHAR(255),
-  user_id INT,
-  UNIQUE KEY (question_id),
+let question = `CREATE TABLE if not exists question(
+  question_id int auto_increment,
+  question varchar(255) not null,
+  question_description varchar(255) not null,
+  question_code_block varchar(255) not null,
+  tags varchar(255) not null,
+  user_id int not null,        
+  PRIMARY KEY (question_id),
   FOREIGN KEY (user_id) REFERENCES registration(user_id)
-  )`
+)`;
 
-  pool.query(question, (err, results2) => {
-    if (err) throw err;
-    console.log("question, table created");
-  })
+pool.query(question, (err, results2) => {
+  if (err) throw err;
+  console.log("question, table created");
+});
 
-  let answer = `CREATE TABLE IF NOT EXISTS answer (
+let answer = `CREATE TABLE IF NOT EXISTS answer (
     answer_id INT AUTO_INCREMENT,
     answer_text VARCHAR(255) NOT NULL,
-    answer_code_block VARCHAR(255),
     user_id INT NOT NULL,
     question_id INT NOT NULL,
     PRIMARY KEY (answer_id),
     FOREIGN KEY (user_id) REFERENCES registration(user_id),
     FOREIGN KEY (question_id) REFERENCES question(question_id)
-    )`
+    )`;
 
-    pool.query(answer, (err, results2) => {
-      if (err) throw err;
-      console.log("answer, table created");
-    })
+pool.query(answer, (err, results2) => {
+  if (err) throw err;
+  console.log("answer, table created");
+});
 
 module.exports = pool;

@@ -1,9 +1,19 @@
 import React from "react";
 import hLogo from '../../assets/evangadi-logo-home.png';
 import { LuMenu } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Nav = () => {
+  // const [userData, setUserData] = useContext(UserContext);
+  // const navigate = useNavigate();
+
+  // const signIn = (e) => {
+  //   e.preventDefault();
+  //   if (userData.user) {
+  //     logout();
+  //   }
+  //   navigate("/login")
+  // }
   return (
    
     <div className=' md:inline-flex h-12 w-full md:h-24 cursor-pointer ms-6 md:ms-16 duration-300 '>
