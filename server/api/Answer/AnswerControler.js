@@ -5,20 +5,20 @@ module.exports = {
     const { answer_text } = req.body;
 
     if (!answer_text) {
-      // console.log(">>>>>>>>ERROR: at createAnswer");
+      console.log(">>>>>>>>ERROR: at createAnswer");
       res
         .status(400)
         .json({ msg: "ERROR: Please provide an answer in the answer field." });
     }
     addAnswer(req.body, (err, results) => {
       if (err) {
-        // console.log(">>>>>>>>ERROR: at createAnswer:addAnswer", req.body);
-        // console.log(">>>>>>>>ERROR: at createAnswer:addAnswer");
+        console.log(">>>>>>>>ERROR: at createAnswer:addAnswer", req.body);
+        console.log(">>>>>>>>ERROR: at createAnswer:addAnswer");
         return res
           .status(500)
           .json({ msg: "ERROR: adding the answer: database connection err" });
       }
-      // console.log(">>>>>>>>success: at createAnswer:addAnswer");
+      console.log(">>>>>>>>success: at createAnswer:addAnswer");
 
       return res
         .status(200)

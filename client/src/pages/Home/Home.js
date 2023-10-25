@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AskQuestion from "../AskQueation/AskQueation";
 import hLogo from "../../assets/evangadi-logo-home.png";
+import QuestionsList from "../AskQueation/QuestionList";
+import { MdArrowForwardIos } from "react-icons/md";
 // import Questions from '../../Components/Questions';
 
 // import MdArrowForwardIos from 'react-icons/md'
@@ -87,9 +89,12 @@ const Home = ({ logout }) => {
                   }}
                   className="text-blue-500 hover:underline"
                 >
-                   <div>
+                   {/* <div>
                   {question.question}
-                </div>
+                </div> */}
+                <QuestionsList show={question} />
+
+                <MdArrowForwardIos className="MdArrowForwardIos" />
                   
                   {/* You can add an icon here using a suitable icon library */}
                 </Link>
