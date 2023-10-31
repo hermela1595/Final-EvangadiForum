@@ -2,10 +2,11 @@ const { addAnswer, getAnswers } = require("./AnswerService");
 
 module.exports = {
   createAnswer: (req, res) => {
-    const { answer_text } = req.body;
+    const { answer, questionId,user_id} = req.body;
+   console.log(answer,questionId);
 
-    if (!answer_text) {
-      console.log(">>>>>>>>ERROR: at createAnswer");
+    if (!answer || !questionId) {
+      console.log(">>>>>>>>ERROR: at createAnswer lela");
       res
         .status(400)
         .json({ msg: "ERROR: Please provide an answer in the answer field." });
@@ -13,12 +14,12 @@ module.exports = {
     addAnswer(req.body, (err, results) => {
       if (err) {
         console.log(">>>>>>>>ERROR: at createAnswer:addAnswer", req.body);
-        console.log(">>>>>>>>ERROR: at createAnswer:addAnswer");
+        // console.log(">>>>>>>>ERROR: at createAnswer:addAnswer");
         return res
           .status(500)
           .json({ msg: "ERROR: adding the answer: database connection err" });
       }
-      console.log(">>>>>>>>success: at createAnswer:addAnswer");
+      // console.log(">>>>>>>>success: at createAnswer:addAnswer");
 
       return res
         .status(200)

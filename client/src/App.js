@@ -43,8 +43,8 @@ function App() {
     try {
       // Use setUserData to update the state
       setUserData({
-        token: null,
-        user: null,
+        token: undefined,
+        user: undefined,
       });
       // Other logout logic
       localStorage.setItem("auth-token", "");
@@ -72,7 +72,7 @@ function App() {
         <Route path="/" element={<Home logout={logout} />} />
 
         <Route path="/askquestion" element={<AskQuestion />} />
-        <Route path="/answer/:questionId" element={<AnswerQuestion />} />
+        <Route path="/Answer/:questionId" element={<AnswerQuestion logout={logout} />} />
       </Routes>
       <Footer />
     </Router>

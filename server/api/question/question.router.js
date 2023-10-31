@@ -4,11 +4,11 @@ const router = require("express").Router();
 const {
   createQuestion,
   // getAllQuestions,
-  getAllQuestions,
+  getQuestions,
 } = require("./question.controler");
 
 router.post("/", createQuestion);
-router.get("/all", getAllQuestions);
+router.get("/all", getQuestions);
 // router.get("/", getQuestionDetails);
 
 
