@@ -9,21 +9,18 @@ const Home = ({ logout }) => {
   const [userData, setUserData] = useContext(UserContext);
   const [page, setPage] = useState("Home");
   const [allQuestions, setAllQuestions] = useState([]);
-  let [currrentQuestion, setCurrrentQuestion] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!userData.user) navigate("/login");
     // console.log("Home useEffect: 0");
     const fetchQuestions = async () => {
-      // console.log("Home useEffect >> fetchQuestions: 1");
 
       let questions = await axios.get(
         "http://localhost:4000/api/questions/all"
       );
-      // console.log("Home useEffect >> fetchQuestions: 2");
-
-      questions = questions.data.data;
+        questions = questions.data.data;
 
       // console.log("Fetched questions:", questions);
       setAllQuestions(() => {
@@ -52,13 +49,12 @@ const Home = ({ logout }) => {
           </div>
 
           <h3 className="text-xl font-medium ps-28 pt-4 ">Questions</h3>
-          {/* <div>printed:{allQuestions[0]?.question_id}</div> */}
+         
           <div className="mt-4 divide-y-4 divide-slate-400/[.24] divide-gray-800">
             {allQuestions?.map((question) => (
               <div key={question.question_id} className="mb-4">
                 <Link
                   to={`/Answer/${question.question_id}`}
-                  // to={`/answer/${question.question_id}`}
                   state={{
                     question: question,
                     currentUserId: userData.user?.id,

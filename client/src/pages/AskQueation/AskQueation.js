@@ -80,33 +80,3 @@ function AskQuestion() {
 export default AskQuestion;
 
 
-
-
-
-
-  //     <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow">
-  //       <div className="mb-4">
-  //         <label htmlFor="question" className="text-sm font-semibold text-gray-600">Question</label>
-  //         <input
-  //           type="text"
-  //           name="question"
-  //           value={form.question}
-  //           onChange={handleChange}
-  //           className="w-full border p-2 rounded focus:outline-none focus:ring focus:border-blue-500"
-  //         />
-  //       </div>
-  //       <div className="mb-4">
-  //         <label htmlFor="questionDescription" className="text-sm font-semibold text-gray-600">Question Description</label>
-  //         <textarea
-  //           name="questionDescription"
-  //           value={form.questionDescription}
-  //           onChange={handleChange}
-  //           className="w-full border p-2 rounded focus:outline-none focus:ring focus:border-blue-500"
-  //         />
-  //       </div>
-
-  //       {/* <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Submit</button> */}
-  //     </form>
-  //     <Link to="/Answers" className="bg-blue-500 hover:bg-orange-400 text-white font-medium py-2 px-10 rounded text-sm md:me-[900px]">Submit</Link> 
-  //   </div>
-  // );

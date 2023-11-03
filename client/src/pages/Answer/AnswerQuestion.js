@@ -7,11 +7,8 @@ import QuestionsList from "../AskQueation/QuestionList";
 const AnswerQuestion = (props) => {
   let { questionId } = useParams();
 
-  // console.log(typeof questionId);
-  // questionId = parseInt(questionId?.slice(1, 2));
-  // questionId = parseInt(questionId);
-  const [userData, setUserData] = useContext(UserContext)
- console.log(userData);
+  const [userData, setUserData] = useContext(UserContext);
+  console.log(userData);
   const [answer, setAnswer] = useState({});
   const [prevAnswers, setPrevAnswers] = useState();
 
@@ -20,9 +17,9 @@ const AnswerQuestion = (props) => {
   const { question, currentUserId } = location.state;
   console.log("Location data", question);
 
-  const handleChange =  (e) => {
+  const handleChange = (e) => {
     console.log(e.target.value);
-   setAnswer({
+    setAnswer({
       answer: e.target.value,
       questionId: question.question_id,
       userId: currentUserId,
@@ -33,9 +30,9 @@ const AnswerQuestion = (props) => {
     try {
       console.log(answer);
 
-      const answerRes=await axios.post("http://localhost:4000/api/Answer/", {
+      const answerRes = await axios.post("http://localhost:4000/api/Answer/", {
         answer: answer.answer,
-        questionId:questionId,
+        questionId: questionId,
         user_id: userData.user.id,
       });
 
@@ -48,7 +45,6 @@ const AnswerQuestion = (props) => {
   };
 
   useEffect(() => {
-    // setAskedQuestion(question);
     const fetchAnswers = async () => {
       const answers = await axios.get(
         `http://localhost:4000/api/Answer/${questionId}`
@@ -79,7 +75,11 @@ const AnswerQuestion = (props) => {
         </div>
 
         <div className="mb-4">
-        {prevAnswers?.length != 0 && <h4 className=" text-xl font-semibold">Answer From the Community</h4>}
+          {prevAnswers?.length != 0 && (
+            <h4 className=" text-xl font-semibold">
+              Answer From the Community
+            </h4>
+          )}
         </div>
         <div className="answer__list">
           <div className="">
@@ -93,9 +93,7 @@ const AnswerQuestion = (props) => {
       </div>
       <div className="p-40 ">
         <div className="text-center">
-          <div className=" text-sm font-semibold ">
-            Answer The top Question
-          </div>
+          <div className=" text-sm font-semibold ">Answer The top Question</div>
         </div>
 
         <div className="text-center">
@@ -121,124 +119,5 @@ const AnswerQuestion = (props) => {
     </div>
   );
 };
-
-// ------------------------------------------------
-
-//   let params = useParams();
-//   console.log(params);
-//   const [userData, setUserData] = useContext(UserContext);
-//   const [post, setPost] = useState({});
-//   const [form, setForm] = useState({});
-//   const [answer, setAnswer] = useState([]);
-//   const [loading, setLoading] = useState(false);
-//   const navigate = useNavigate();
-//   console.log(userData.singleQuestion);
-//   useEffect(() => {
-//     if (!userData.user) {
-//       navigate("/login");
-//     }
-//     const fetch = async () => {
-//       const response = await axios.get( // Changed from post to get
-//         `http://localhost:4000/api/questions/${params.question_id}`,
-//         {
-//           answer_id: userData.singleQuestion.question_id,
-//         }
-//       );
-//       setPost(response.data.data);
-//     };
-//     fetch();
-//   }, [userData.user]);
-
-//   useEffect(() => {
-//     const get = async () => {
-//       const res = await axios.post( // Changed from post to get
-//         "http://localhost:4000/api/Answers/questionId",
-//         {
-//           answer_id: userData.singleQuestion.question_id,
-//         }
-//       );
-//       setAnswer(res.data.data);
-//     };
-//     get();
-//   }, [answer.length]);
-
-//   const handleChange = (e) => {
-//     setForm({ ...form, [e.target.name]: e.target.value }); // Added spread operator
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     await axios.post("http://localhost:4000/api/answer", {
-//       answer: form.answer,
-//       user_id: userData.user.id,
-//       question_id: post.question_id, // Uncomment this line
-//     });
-//     if (answer.length === 0) {
-//       setAnswer([""]);
-//       console.log(answer);
-//     } else {
-//       setAnswer([]);
-//     }
-
-//     setForm({ answer: "" });
-//   };
-
-//   return (
-//     <div className="answer">
-//   <hr className="border-t border-gray-300" />
-//   <div className="answer__conatiner">
-//     <h5 className="text-xl font-bold mb-3">Question</h5>
-//     <h5 className="question__line mb-3">{post?.question}</h5>
-//     <p className="text-sm text-gray-600 mt-0 mb-4">{post?.question_description}</p>
-//     <hr className="border-t border-gray-300" />
-//     <h5 className="answer__community mt-4 text-xl font-bold">Answer From The Community</h5>
-//     <hr className="border-t border-gray-300" />
-//     {answer &&
-//       answer?.map((item) => (
-//         <div key={item.id} className="answer__info mt-4">
-//           <div className="question__icon">
-//             <div className="icon flex items-center">
-//               <span>
-//                 {/* <AccountCircleTwoToneIcon style={{ fontSize: "60px" }} /> */}
-//                 <p className="mx-3 text-xl font-bold">{item.user_name}</p>
-//               </span>
-//             </div>
-//             <div className="answer__desc mt-4">{item.answer}</div>
-//           </div>
-//         </div>
-//       ))}
-
-//     <div className="answer__box mt-4">
-//       <div className="answer__topQuestion text-xl font-bold">Answer The Top Questions</div>
-
-//       <div className="answer__link link mt-1">
-//         <Link to="/" className="text-blue-500 hover:text-blue-700">Go to question page</Link>
-//       </div>
-
-//       <form onSubmit={handleSubmit} className="mt-4">
-//         <textarea
-//           className="question__form w-full p-2 border border-gray-300 rounded mb-4"
-//           name="answer"
-//           id=""
-//           cols="110"
-//           rows="10"
-//           placeholder="Your Answer here"
-//           value={form.answer}
-//           onChange={handleChange}
-//         ></textarea>
-//         <br />
-//         <br />
-//         <div className="answer__button">
-//           <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" type="submit">
-//             Post Your Answer
-//           </button>
-//         </div>
-//       </form>
-//     </div>
-//   </div>
-// </div>
-
-//   );
-// };
 
 export default AnswerQuestion;
